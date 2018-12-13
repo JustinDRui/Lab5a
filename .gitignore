@@ -1,104 +1,89 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+class Heap:
+    a=[1,2,3,7,8,0]
+    def __init__(self):
+        self.heap_array = []
+    i=0
 
-# C extensions
-*.so
+    def is_empty(self):
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+        return len(self.heap_array) == 0
+    def is_valid(self):
+        for i in range(1, len(self.heap_array)):
+            if self.heap_array[i] < self.heap_array[(i - 1) // 2]:
+                return False
+    def sort(self):
+        minelement =119191919119191919199191
+        for i in range (len(self.heap_array)):
+            element = self.heap_array[i]
+            if element< minelement:
+                minelement = element
+                x=i
+        self.heap_array[x] = self.heap_array[0]
+        self.heap_array[0]=minelement
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
+        for i in range (1,len(self.heap_array)):
 
-# Translations
-*.mo
-*.pot
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
+           if self.heap_array[(i-1)//2]>self.heap_array[i]:
+                temp =self.heap_array[i]
+                self.heap_array[i]= self.heap_array[(i - 1) // 2]
+                self.heap_array[(i-1)//2]=temp
+        return self.heap_array
 
-# Flask stuff:
-instance/
-.webassets-cache
 
-# Scrapy stuff:
-.scrapy
 
-# Sphinx documentation
-docs/_build/
 
-# PyBuilder
-target/
+    def insert(self, k):
+        self.heap_array.append(k)
+        self.sort()
 
-# Jupyter Notebook
-.ipynb_checkpoints
+        return self.heap_array
 
-# pyenv
-.python-version
 
-# celery beat schedule file
-celerybeat-schedule
 
-# SageMath parsed files
-*.sage.py
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+     # TODO: Complete implementation
+    def extract_min(self):
 
-# Spyder project settings
-.spyderproject
-.spyproject
+        if self.is_empty():
+            return None
+        sortarray=[0]*len(self.heap_array)
+        for i in range (len(self.heap_array)):
+            min_elem = self.heap_array[0]
+            self.heap_array[0]= 10000000000000
+            sortarray[i]=min_elem
+            self.sort()
+            print(sortarray[i])
+    # TODO: Complete implementation
+        return sortarray
 
-# Rope project settings
-.ropeproject
+    def printheaps(self):
+        for i in range (len(self.heap_array)):
+            print(self.heap_array[i])
 
-# mkdocs documentation
-/site
+hp1 = Heap()
+hp1.heap_array = [1,2,3,2,0,4]
+Heap.printheaps(hp1)
+print("_______")
+Heap.sort(hp1)
 
-# mypy
-.mypy_cache/
+Heap.printheaps(hp1)
+print("_______")
+
+Heap.insert(hp1,0)
+
+Heap.extract_min(hp1)
+print("_______")
+hp2 = Heap()
+hp2.heap_array = [1, 40, 20, 90, 100, 0,2]
+Heap.printheaps(hp2)
+print("_______")
+Heap.sort(hp2)
+print("_______")
+Heap.printheaps(hp2)
+
+Heap.insert(hp2,0)
+print("_______")
+Heap.extract_min(hp2)
